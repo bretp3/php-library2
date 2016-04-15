@@ -14,6 +14,7 @@ class PushRequest
     private $audience;
     private $notification;
     private $options = null;
+    private $in_app = null;
     private $deviceTypes;
     private $message;
 
@@ -52,6 +53,12 @@ class PushRequest
         return $this;
     }
 
+    function setInApp($in_app)
+    {
+        $this->in_app = $in_app;
+        return $this;
+    }
+
     function getPayload()
     {
         $payload = array(
@@ -64,6 +71,9 @@ class PushRequest
         }
         if (!is_null($this->options)) {
             $payload['options'] = $this->options;
+        }
+        if (!is_null($this->in_app)) {
+            $payload['in_app'] = $this->in_app;
         }
         return $payload;
     }
