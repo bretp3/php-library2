@@ -61,6 +61,17 @@ class ScheduledPushRequest
         return new PushResponse($response);
     }
 
+    function update($id)
+    {
+        $uri = $this->airship->buildUrl(self::SCHEDULE_URL .'/'. $id);
+        $logger = UALog::getLogger();
+        $response = $this->airship->request("PUT",
+            json_encode($this->getPayload()), $uri, "application/json", 3);
+        $payload = json_decode($response->raw_body, true);
+        $logger->info("Scheduled push sent successfully.", array("schedule_urls" => $payload['schedule_urls']));
+        return new PushResponse($response);
+    }
+
     function delete($id)
     {
         $uri = $this->airship->buildUrl(self::SCHEDULE_URL .'/'. $id);
