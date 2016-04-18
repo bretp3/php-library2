@@ -68,7 +68,7 @@ class ScheduledPushRequest
         $logger = UALog::getLogger();
         $response = $this->airship->request("DELETE", "", $uri, "application/json", 3);
         $logger->info("Scheduled push delete successfully.", array());
-        return new PushResponse($response);
+        return;
     }
 
 }
