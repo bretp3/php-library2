@@ -61,4 +61,13 @@ class ScheduledPushRequest
         return new PushResponse($response);
     }
 
+    function delete($id)
+    {
+        $uri = $this->airship->buildUrl(self::SCHEDULE_URL .'/'. $id);
+        $logger = UALog::getLogger();
+        $response = $this->airship->request("DELETE", array(), $uri, "application/json", 3);
+        $logger->info("Scheduled push delete successfully.", array());
+        return new PushResponse($response);
+    }
+
 }
